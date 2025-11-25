@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bea Richter & Friends</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container header-container">
+            <a href="#" class="logo">Bea Richter & Friends</a>
+            <nav class="nav">
+                <ul class="nav-list">
+                    <li><a href="#band">Band</a></li>
+                    <li><a href="#members">Members</a></li>
+                    <li><a href="#music">Music</a></li>
+                    <li><a href="#gallery">Gallery</a></li>
+                </ul>
+            </nav>
+            <a href="#booking" class="btn btn-primary">Book Now</a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-bg">
+            <img src="assets/images/hero.jpg" alt="Stage Background">
+        </div>
+        <div class="hero-content container">
+            <h1 class="hero-title">BEA RICHTER<br>& FRIENDS</h1>
+            <p class="hero-subtitle">LIVE MUSIC | ENERGY | PASSION</p>
+            <a href="#booking" class="btn btn-outline">JETZT ANFRAGEN</a>
+        </div>
+    </section>
+
+    <!-- Members Section -->
+    <section class="members section" id="members">
+        <div class="container">
+            <h2 class="section-title">THE BAND</h2>
+            <div class="members-grid">
+                <!-- Bea -->
+                <div class="member-card">
+                    <div class="member-image">
+                        <img src="assets/images/bea.jpg" alt="Bea Richter">
+                    </div>
+                    <div class="member-info">
+                        <h3>Bea Richter</h3>
+                        <p class="role">Vocals</p>
+                        <p class="bio">Die Stimme, die unter die Haut geht. Bea bringt Emotion und Power auf jede Bühne.</p>
+                    </div>
+                </div>
+                <!-- Silas -->
+                <div class="member-card">
+                    <div class="member-image">
+                        <img src="assets/images/silas.jpg" alt="Silas">
+                    </div>
+                    <div class="member-info">
+                        <h3>Silas</h3>
+                        <p class="role">Drums</p>
+                        <p class="bio">Der Herzschlag der Band. Silas sorgt für den perfekten Groove und treibende Rhythmen.</p>
+                    </div>
+                </div>
+                <!-- Ruwen -->
+                <div class="member-card">
+                    <div class="member-image">
+                        <img src="assets/images/ruwen.jpg" alt="Ruwen">
+                    </div>
+                    <div class="member-info">
+                        <h3>Ruwen</h3>
+                        <p class="role">Piano</p>
+                        <p class="bio">Virtuos an den Tasten. Ruwen zaubert Melodien, die verzaubern und mitreißen.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Latest / News Section -->
+    <section class="latest section" id="latest">
+        <div class="container">
+            <h2 class="section-title">LATEST GIGS</h2>
+            <div class="news-grid">
+                <div class="news-item">
+                    <span class="date">20. Nov 2025</span>
+                    <h3>Stadtfest Berlin</h3>
+                    <p>Ein unvergesslicher Abend mit toller Stimmung!</p>
+                </div>
+                <div class="news-item">
+                    <span class="date">15. Nov 2025</span>
+                    <h3>Private Wedding</h3>
+                    <p>Romantische Begleitung und Party bis in die Morgenstunden.</p>
+                </div>
+                <div class="news-item">
+                    <span class="date">01. Nov 2025</span>
+                    <h3>Jazz Club Munich</h3>
+                    <p>Intime Atmosphäre und groovige Sounds.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Music / Audio Section -->
+    <section class="music section" id="music">
+        <div class="container">
+            <h2 class="section-title">LISTEN</h2>
+            <div class="audio-player-wrapper">
+                <div class="track">
+                    <div class="track-info">
+                        <span class="track-title">Summer Vibes (Demo)</span>
+                        <span class="track-duration">03:45</span>
+                    </div>
+                    <audio controls>
+                        <source src="assets/audio/demo1.mp3" type="audio/mpeg">
+                        Your browser does not support the audio element.
+                    </audio>
+                </div>
+                <div class="track">
+                    <div class="track-info">
+                        <span class="track-title">Acoustic Session</span>
+                        <span class="track-duration">04:12</span>
+                    </div>
+                    <audio controls>
+                        <source src="assets/audio/demo2.mp3" type="audio/mpeg">
+                        Your browser does not support the audio element.
+                    </audio>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Booking Section -->
+    <section class="booking section" id="booking">
+        <div class="container">
+            <h2 class="section-title">BOOKING</h2>
+            <form class="booking-form" id="bookingForm">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" name="name" required placeholder="Ihr Name">
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required placeholder="Ihre Email-Adresse">
+                </div>
+                <div class="form-group">
+                    <label for="date">Datum</label>
+                    <input type="date" id="date" name="date">
+                </div>
+                <div class="form-group">
+                    <label for="message">Nachricht</label>
+                    <textarea id="message" name="message" rows="5" required placeholder="Erzählen Sie uns von Ihrem Event..."></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">Anfrage Senden</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Bea Richter & Friends. All rights reserved.</p>
+            <div class="socials">
+                <a href="#">Instagram</a>
+                <a href="#">Facebook</a>
+                <a href="#">YouTube</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
