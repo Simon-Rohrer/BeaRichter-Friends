@@ -8,7 +8,8 @@
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
 </head>
 
 <body>
@@ -76,25 +77,6 @@
         <div class="container">
             <h2 class="section-title">LATEST GIGS</h2>
 
-            <!-- New Post Form (Hidden by default) -->
-            <div id="newPostContainer" class="new-post-container" style="display: none;">
-                <h3>Neuen Beitrag erstellen</h3>
-                <form id="newPostForm">
-                    <div class="form-group">
-                        <label for="postTitle">Titel</label>
-                        <input type="text" id="postTitle" name="postTitle" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="postDate">Datum</label>
-                        <input type="date" id="postDate" name="postDate" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="postContent">Inhalt</label>
-                        <textarea id="postContent" name="postContent" rows="3" required></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Veröffentlichen</button>
-                </form>
-            </div>
 
             <div class="news-grid" id="newsGrid">
                 <div class="news-item">
@@ -123,21 +105,41 @@
             <div class="audio-player-wrapper">
                 <div class="track">
                     <div class="track-info">
-                        <span class="track-title">Summer Vibes (Demo)</span>
-                        <span class="track-duration">03:45</span>
+                        <span class="track-title">Back to Black</span>
+                        <span class="track-duration">03:58</span>
                     </div>
                     <audio controls>
-                        <source src="assets/audio/demo1.mp3" type="audio/mpeg">
+                        <source src="assets/audio/Back to Black.mp3" type="audio/mpeg">
                         Your browser does not support the audio element.
                     </audio>
                 </div>
                 <div class="track">
                     <div class="track-info">
-                        <span class="track-title">Acoustic Session</span>
-                        <span class="track-duration">04:12</span>
+                        <span class="track-title">Gravity</span>
+                        <span class="track-duration">03:48</span>
                     </div>
                     <audio controls>
-                        <source src="assets/audio/demo2.mp3" type="audio/mpeg">
+                        <source src="assets/audio/Gravity.mp3" type="audio/mpeg">
+                        Your browser does not support the audio element.
+                    </audio>
+                </div>
+                <div class="track">
+                    <div class="track-info">
+                        <span class="track-title">If I Ain't Got You</span>
+                        <span class="track-duration">03:47</span>
+                    </div>
+                    <audio controls>
+                        <source src="assets/audio/If I ain't got you.mp3" type="audio/mpeg">
+                        Your browser does not support the audio element.
+                    </audio>
+                </div>
+                <div class="track">
+                    <div class="track-info">
+                        <span class="track-title">Wicked Games</span>
+                        <span class="track-duration">04:56</span>
+                    </div>
+                    <audio controls>
+                        <source src="assets/audio/Wicked Games.mp3" type="audio/mpeg">
                         Your browser does not support the audio element.
                     </audio>
                 </div>

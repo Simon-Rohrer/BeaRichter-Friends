@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Content Management - Bea Richter & Friends</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <!-- Header -->
+    <div id="header-placeholder"></div>
+
+    <!-- Main Content -->
+    <main style="padding-top: 100px; min-height: 100vh;">
+        <div class="container">
+            <h1 class="section-title" style="margin-bottom: 40px;">Content Management</h1>
+
+            <!-- Latest Gigs Management -->
+            <section class="manage-section">
+                <div class="manage-header">
+                    <h2>Latest Gigs</h2>
+                    <button class="btn btn-primary" id="addGigBtn">+ Neuer Gig</button>
+                </div>
+                <div id="gigsContainer" class="manage-items-grid"></div>
+            </section>
+
+            <!-- Music Management -->
+            <section class="manage-section">
+                <div class="manage-header">
+                    <h2>Music</h2>
+                    <button class="btn btn-primary" id="addMusicBtn">+ Neuer Track</button>
+                </div>
+                <div id="musicContainer" class="manage-items-grid"></div>
+            </section>
+
+            <!-- Gallery Management -->
+            <section class="manage-section">
+                <div class="manage-header">
+                    <h2>Gallery</h2>
+                    <button class="btn btn-primary" id="addGalleryBtn">+ Neues Bild</button>
+                </div>
+                <div id="galleryContainer" class="manage-items-grid"></div>
+            </section>
+
+            <!-- User Management (Admin Only) -->
+            <section class="manage-section" id="userManagementSection" style="display: none;">
+                <div class="manage-header">
+                    <h2>User Management</h2>
+                </div>
+                <div class="user-list-container">
+                    <table class="user-table">
+                        <thead>
+                            <tr>
+                                <th>Username</th>
+                                <th>Role</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="userTableBody">
+                            <!-- Users will be populated here by JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Add/Edit Gig Modal -->
+    <div id="gigModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" data-modal="gigModal">&times;</span>
+            <h2 id="gigModalTitle">Gig hinzufügen</h2>
+            <form id="gigForm">
+                <div class="form-group">
+                    <label for="gigDate">Datum</label>
+                    <input type="date" id="gigDate" required>
+                </div>
+                <div class="form-group">
+                    <label for="gigVenue">Venue</label>
+                    <input type="text" id="gigVenue" required>
+                </div>
+                <div class="form-group">
+                    <label for="gigDescription">Beschreibung</label>
+                    <textarea id="gigDescription" rows="3"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="gigImage">Bild</label>
+                    <input type="file" id="gigImage" accept="image/*">
+                    <small>Optional - leer lassen um bestehendes Bild zu behalten</small>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">Speichern</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Add/Edit Music Modal -->
+    <div id="musicModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" data-modal="musicModal">&times;</span>
+            <h2 id="musicModalTitle">Track hinzufügen</h2>
+            <form id="musicForm">
+                <div class="form-group">
+                    <label for="musicTitle">Titel</label>
+                    <input type="text" id="musicTitle" required>
+                </div>
+                <div class="form-group">
+                    <label for="musicArtist">Artist</label>
+                    <input type="text" id="musicArtist" required>
+                </div>
+                <div class="form-group">
+                    <label for="musicFile">Audio-Datei</label>
+                    <input type="file" id="musicFile" accept="audio/*">
+                    <small>Optional - leer lassen um bestehende Datei zu behalten</small>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">Speichern</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Add/Edit Gallery Modal -->
+    <div id="galleryModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" data-modal="galleryModal">&times;</span>
+            <h2 id="galleryModalTitle">Bild hinzufügen</h2>
+            <form id="galleryForm">
+                <div class="form-group">
+                    <label for="galleryCaption">Beschreibung</label>
+                    <input type="text" id="galleryCaption" required>
+                </div>
+                <div class="form-group">
+                    <label for="galleryFile">Bild-Datei</label>
+                    <input type="file" id="galleryFile" accept="image/*">
+                    <small>Optional - leer lassen um bestehendes Bild zu behalten</small>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">Speichern</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div id="footer-placeholder"></div>
+
+    <script src="script.js"></script>
+    <script src="manage.js"></script>
+</body>
+
+</html>

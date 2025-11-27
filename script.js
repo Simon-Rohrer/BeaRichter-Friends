@@ -37,9 +37,9 @@ document.addEventListener('DOMContentLoaded', async () => {
     // Initialize Mock Users if not exists
     if (!localStorage.getItem(USERS_KEY)) {
         const initialUsers = [
-            { id: 1, username: 'admin', password: 'password', role: 'ADMIN' },
-            { id: 2, username: 'leiter', password: 'password', role: 'Bandleiter' },
-            { id: 3, username: 'member', password: 'password', role: 'Bandmitglied' }
+            { id: 1, username: 'admin', password: 'password', role: 'ADMIN', roleLevel: 1 },
+            { id: 2, username: 'leiter', password: 'password', role: 'Bandleiter', roleLevel: 2 },
+            { id: 3, username: 'member', password: 'password', role: 'Bandmitglied', roleLevel: 3 }
         ];
         localStorage.setItem(USERS_KEY, JSON.stringify(initialUsers));
     }
@@ -52,8 +52,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     const loginForm = document.getElementById('loginForm');
     const loginError = document.getElementById('loginError');
     const adminLink = document.getElementById('adminLink');
-    const newPostContainer = document.getElementById('newPostContainer');
-    const newPostForm = document.getElementById('newPostForm');
     const newsGrid = document.getElementById('newsGrid');
     const userTableBody = document.getElementById('userTableBody');
 
@@ -79,6 +77,21 @@ document.addEventListener('DOMContentLoaded', async () => {
         window.location.href = 'index.html';
     }
 
+    // --- PERMISSION FUNCTIONS ---
+    function hasPermission(requiredLevel) {
+        const user = getCurrentUser();
+        if (!user) return false;
+        return user.roleLevel <= requiredLevel;
+    }
+
+    function canManageContent() {
+        return hasPermission(2); // Bandleiter and above
+    }
+
+    function canManageUsers() {
+        return hasPermission(1); // Admin only
+    }
+
     function updateUI() {
         const user = getCurrentUser();
 
@@ -86,21 +99,26 @@ document.addEventListener('DOMContentLoaded', async () => {
             if (loginBtn) loginBtn.style.display = 'none';
             if (logoutBtn) logoutBtn.style.display = 'block';
 
-            // Show Admin Link if ADMIN
-            if (adminLink) {
-                adminLink.style.display = user.role === 'ADMIN' ? 'block' : 'none';
+            // Show Manage Content Link if Admin or Bandleiter
+            const manageLink = document.getElementById('manageLink');
+            if (manageLink) {
+                manageLink.style.display = canManageContent() ? 'block' : 'none';
             }
 
-            // Show New Post Container if logged in
-            if (newPostContainer) {
-                newPostContainer.style.display = 'block';
+            // Show Manage Icon Button if Admin or Bandleiter
+            const manageIconBtn = document.getElementById('manageIconBtn');
+            if (manageIconBtn) {
+                manageIconBtn.style.display = canManageContent() ? 'inline-flex' : 'none';
             }
         } else {
             if (loginBtn) loginBtn.style.display = 'block';
             if (logoutBtn) logoutBtn.style.display = 'none';
 
-            if (adminLink) adminLink.style.display = 'none';
-            if (newPostContainer) newPostContainer.style.display = 'none';
+            const manageLink = document.getElementById('manageLink');
+            if (manageLink) manageLink.style.display = 'none';
+
+            const manageIconBtn = document.getElementById('manageIconBtn');
+            if (manageIconBtn) manageIconBtn.style.display = 'none';
         }
     }
 
@@ -156,46 +174,6 @@ document.addEventListener('DOMContentLoaded', async () => {
         logoutBtn.addEventListener('click', logout);
     }
 
-    // New Post Submit
-    if (newPostForm) {
-        newPostForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            const title = newPostForm.postTitle.value;
-            const date = newPostForm.postDate.value;
-            const content = newPostForm.postContent.value;
-
-            const newPost = {
-                title,
-                date,
-                content
-            };
-
-            // In a real app, save to DB. Here we just append to DOM for demo
-            addPostToGrid(newPost);
-            newPostForm.reset();
-            alert('Beitrag veröffentlicht!');
-        });
-    }
-
-    function addPostToGrid(post) {
-        if (!newsGrid) return;
-
-        const postDiv = document.createElement('div');
-        postDiv.className = 'news-item';
-        postDiv.innerHTML = `
-            <span class="date">${formatDate(post.date)}</span>
-            <h3>${post.title}</h3>
-            <p>${post.content}</p>
-        `;
-
-        // Insert as first child
-        newsGrid.insertBefore(postDiv, newsGrid.firstChild);
-    }
-
-    function formatDate(dateString) {
-        const options = { year: 'numeric', month: 'short', day: 'numeric' };
-        return new Date(dateString).toLocaleDateString('de-DE', options);
-    }
 
     // --- USER MANAGEMENT (users.html) ---
     if (userTableBody) {
