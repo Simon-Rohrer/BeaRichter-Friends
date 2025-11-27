@@ -1,7 +1,8 @@
 :root {
     --bg-color: #0a0a0a;
     --text-color: #f0f0f0;
-    --accent-color: #d4af37; /* Gold */
+    --accent-color: #d4af37;
+    /* Gold */
     --accent-hover: #b5952f;
     --card-bg: #1a1a1a;
     --font-main: 'Outfit', sans-serif;
@@ -67,7 +68,7 @@ img {
 }
 
 .btn-outline {
-    background-color: rgba(0,0,0,0.6);
+    background-color: rgba(0, 0, 0, 0.6);
     border-color: var(--text-color);
     color: var(--text-color);
 }
@@ -99,6 +100,28 @@ img {
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.btn-icon {
+    background: none;
+    border: none;
+    color: var(--text-color);
+    cursor: pointer;
+    padding: 5px;
+    transition: color 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-icon:hover {
+    color: var(--accent-color);
 }
 
 .logo {
@@ -155,7 +178,7 @@ img {
     font-weight: 700;
     line-height: 1.1;
     margin-bottom: 20px;
-    text-shadow: 0 4px 10px rgba(0,0,0,0.5);
+    text-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
 }
 
 .hero-subtitle {
@@ -288,7 +311,8 @@ img {
 
 audio {
     width: 100%;
-    filter: invert(1) hue-rotate(180deg); /* Simple dark mode hack for default audio player */
+    filter: invert(1) hue-rotate(180deg);
+    /* Simple dark mode hack for default audio player */
 }
 
 /* Booking */
@@ -349,6 +373,147 @@ audio {
 
 .socials a:hover {
     color: var(--accent-color);
+}
+
+/* Login Page */
+.login-section {
+    min-height: calc(100vh - 200px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 100px;
+}
+
+.login-container {
+    background-color: var(--card-bg);
+    padding: 40px;
+    border: 1px solid #333;
+    width: 90%;
+    max-width: 400px;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+.login-container h2 {
+    margin-bottom: 30px;
+    text-align: center;
+    color: var(--accent-color);
+    font-size: 2rem;
+}
+
+/* Login Modal */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 2000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(5px);
+}
+
+.modal-content {
+    background-color: var(--card-bg);
+    margin: 15% auto;
+    padding: 40px;
+    border: 1px solid #333;
+    width: 90%;
+    max-width: 400px;
+    border-radius: 8px;
+    position: relative;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+.close-modal {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close-modal:hover,
+.close-modal:focus {
+    color: var(--accent-color);
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.modal h2 {
+    margin-bottom: 20px;
+    text-align: center;
+    color: var(--accent-color);
+}
+
+.error-message {
+    color: #ff4444;
+    margin-top: 15px;
+    font-size: 0.9rem;
+    text-align: center;
+}
+
+/* New Post Container */
+.new-post-container {
+    background: var(--card-bg);
+    padding: 30px;
+    border-radius: 8px;
+    margin-bottom: 40px;
+    border: 1px solid #333;
+}
+
+.new-post-container h3 {
+    margin-bottom: 20px;
+    color: var(--accent-color);
+}
+
+/* User Management */
+.user-list-container {
+    background: var(--card-bg);
+    padding: 30px;
+    border-radius: 8px;
+    overflow-x: auto;
+}
+
+.user-table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 600px;
+}
+
+.user-table th,
+.user-table td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #333;
+}
+
+.user-table th {
+    color: var(--accent-color);
+    text-transform: uppercase;
+    font-size: 0.9rem;
+}
+
+.user-table tr:last-child td {
+    border-bottom: none;
+}
+
+.btn-small {
+    padding: 5px 10px;
+    font-size: 0.8rem;
+    margin-right: 5px;
+}
+
+.btn-danger {
+    background-color: rgba(255, 68, 68, 0.2);
+    border-color: #ff4444;
+    color: #ff4444;
+}
+
+.btn-danger:hover {
+    background-color: #ff4444;
+    color: white;
 }
 
 /* Responsive */

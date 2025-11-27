@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="de">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,23 +10,10 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
 </head>
+
 <body>
 
-    <!-- Header -->
-    <header class="header">
-        <div class="container header-container">
-            <a href="#" class="logo">Bea Richter & Friends</a>
-            <nav class="nav">
-                <ul class="nav-list">
-                    <li><a href="#band">Band</a></li>
-                    <li><a href="#members">Members</a></li>
-                    <li><a href="#music">Music</a></li>
-                    <li><a href="#gallery">Gallery</a></li>
-                </ul>
-            </nav>
-            <a href="#booking" class="btn btn-primary">Book Now</a>
-        </div>
-    </header>
+    <div id="header-placeholder"></div>
 
     <!-- Hero Section -->
     <section class="hero" id="home">
@@ -52,7 +40,8 @@
                     <div class="member-info">
                         <h3>Bea Richter</h3>
                         <p class="role">Vocals</p>
-                        <p class="bio">Die Stimme, die unter die Haut geht. Bea bringt Emotion und Power auf jede Bühne.</p>
+                        <p class="bio">Die Stimme, die unter die Haut geht. Bea bringt Emotion und Power auf jede Bühne.
+                        </p>
                     </div>
                 </div>
                 <!-- Silas -->
@@ -63,7 +52,8 @@
                     <div class="member-info">
                         <h3>Silas</h3>
                         <p class="role">Drums</p>
-                        <p class="bio">Der Herzschlag der Band. Silas sorgt für den perfekten Groove und treibende Rhythmen.</p>
+                        <p class="bio">Der Herzschlag der Band. Silas sorgt für den perfekten Groove und treibende
+                            Rhythmen.</p>
                     </div>
                 </div>
                 <!-- Ruwen -->
@@ -85,7 +75,28 @@
     <section class="latest section" id="latest">
         <div class="container">
             <h2 class="section-title">LATEST GIGS</h2>
-            <div class="news-grid">
+
+            <!-- New Post Form (Hidden by default) -->
+            <div id="newPostContainer" class="new-post-container" style="display: none;">
+                <h3>Neuen Beitrag erstellen</h3>
+                <form id="newPostForm">
+                    <div class="form-group">
+                        <label for="postTitle">Titel</label>
+                        <input type="text" id="postTitle" name="postTitle" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="postDate">Datum</label>
+                        <input type="date" id="postDate" name="postDate" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="postContent">Inhalt</label>
+                        <textarea id="postContent" name="postContent" rows="3" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Veröffentlichen</button>
+                </form>
+            </div>
+
+            <div class="news-grid" id="newsGrid">
                 <div class="news-item">
                     <span class="date">20. Nov 2025</span>
                     <h3>Stadtfest Berlin</h3>
@@ -153,25 +164,17 @@
                 </div>
                 <div class="form-group">
                     <label for="message">Nachricht</label>
-                    <textarea id="message" name="message" rows="5" required placeholder="Erzählen Sie uns von Ihrem Event..."></textarea>
+                    <textarea id="message" name="message" rows="5" required
+                        placeholder="Erzählen Sie uns von Ihrem Event..."></textarea>
                 </div>
                 <button type="submit" class="btn btn-primary btn-block">Anfrage Senden</button>
             </form>
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <p>&copy; 2025 Bea Richter & Friends. All rights reserved.</p>
-            <div class="socials">
-                <a href="#">Instagram</a>
-                <a href="#">Facebook</a>
-                <a href="#">YouTube</a>
-            </div>
-        </div>
-    </footer>
+    <div id="footer-placeholder"></div>
 
     <script src="script.js"></script>
 </body>
+
 </html>
