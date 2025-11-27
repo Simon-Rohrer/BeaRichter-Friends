@@ -1,0 +1,24 @@
+//
+// Zum Ausführen des Media Optimizer Skripts, oben im Terminal "Run Task / Aufgabe ausführen" auswählen und "Run Media Optimizer Script" auswählen
+//
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Run Media Optimizer Script",
+            "type": "shell",
+            "command": "./optimize_media.sh",
+            "group": "build",
+            "presentation": {
+                "reveal": "always",
+                "panel": "new"
+            },
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "runOptions": {
+                "instanceLimit": 1 // Stellt sicher, dass nur eine Instanz gleichzeitig läuft
+            }
+        }
+    ]
+}

@@ -12,7 +12,7 @@ Dann im Browser öffnen: [http://localhost:8000](http://localhost:8000)
 
 ## 🛑 Server beenden
 
-**Einfachste Methode:** Drücke `Ctrl+C` im Terminal
+**Einfachste Methode:** Drücke `control+C` im Terminal
 
 **Alternative:**
 
