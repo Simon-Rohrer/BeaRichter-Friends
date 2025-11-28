@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const currentUser = JSON.parse(localStorage.getItem(CURRENT_USER_KEY));
     if (!currentUser || currentUser.roleLevel > 2) {
         alert('Keine Berechtigung für diese Seite!');
-        window.location.href = 'index.html';
+        window.location.href = '../index.html';
         return;
     }
 

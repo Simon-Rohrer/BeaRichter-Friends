@@ -3,11 +3,31 @@ async function loadComponents() {
     const headerPlaceholder = document.getElementById('header-placeholder');
     const footerPlaceholder = document.getElementById('footer-placeholder');
 
+    // Determine if we are in the components directory
+    const isComponentDir = window.location.pathname.includes('/components/');
+    const basePath = isComponentDir ? '' : 'components/';
+
     if (headerPlaceholder) {
         try {
-            const response = await fetch('components/header.html');
+            const response = await fetch(basePath + 'header.html');
             const html = await response.text();
             headerPlaceholder.innerHTML = html;
+
+            // Fix links if we are in a subdirectory
+            if (isComponentDir) {
+                const links = headerPlaceholder.querySelectorAll('a');
+                links.forEach(link => {
+                    const href = link.getAttribute('href');
+                    if (href) {
+                        if (href === 'index.html' || href.startsWith('index.html#')) {
+                            link.setAttribute('href', '../' + href);
+                        } else if (href.startsWith('components/')) {
+                            // e.g. components/manage.html -> manage.html
+                            link.setAttribute('href', href.replace('components/', ''));
+                        }
+                    }
+                });
+            }
         } catch (error) {
             console.error('Error loading header:', error);
         }
@@ -15,9 +35,20 @@ async function loadComponents() {
 
     if (footerPlaceholder) {
         try {
-            const response = await fetch('components/footer.html');
+            const response = await fetch(basePath + 'footer.html');
             const html = await response.text();
             footerPlaceholder.innerHTML = html;
+
+            // Fix links in footer if needed (similar logic)
+            if (isComponentDir) {
+                const links = footerPlaceholder.querySelectorAll('a');
+                links.forEach(link => {
+                    const href = link.getAttribute('href');
+                    if (href && (href === 'index.html' || href.startsWith('index.html#'))) {
+                        link.setAttribute('href', '../' + href);
+                    }
+                });
+            }
         } catch (error) {
             console.error('Error loading footer:', error);
         }
@@ -32,7 +63,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     // --- MOCK DATA & AUTH ---
     const USERS_KEY = 'br_users';
     const CURRENT_USER_KEY = 'br_current_user';
-    const POSTS_KEY = 'br_posts';
+    const GIGS_KEY = 'br_gigs';
+    const MUSIC_KEY = 'br_music';
 
     // Initialize Mock Users if not exists
     if (!localStorage.getItem(USERS_KEY)) {
@@ -74,7 +106,11 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     function logout() {
         localStorage.removeItem(CURRENT_USER_KEY);
-        window.location.href = 'index.html';
+        if (window.location.pathname.includes('/components/')) {
+            window.location.href = '../index.html';
+        } else {
+            window.location.href = 'index.html';
+        }
     }
 
     // --- PERMISSION FUNCTIONS ---
@@ -102,7 +138,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             // Show Manage Content Link if Admin or Bandleiter
             const manageLink = document.getElementById('manageLink');
             if (manageLink) {
-                manageLink.style.display = canManageContent() ? 'block' : 'none';
+                manageLink.style.display = canManageContent() ? 'list-item' : 'none';
             }
 
             // Show Manage Icon Button if Admin or Bandleiter
@@ -186,7 +222,11 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         // Redirect if not admin
         if (!currentUser || currentUser.role !== 'ADMIN') {
-            window.location.href = 'index.html';
+            if (window.location.pathname.includes('/components/')) {
+                window.location.href = '../index.html';
+            } else {
+                window.location.href = 'index.html';
+            }
             return;
         }
 
@@ -265,7 +305,74 @@ document.addEventListener('DOMContentLoaded', async () => {
         });
     }
 
-    // Initial UI Update
+    // --- DYNAMIC CONTENT LOADING ---
+    function loadGigs() {
+        const newsGrid = document.getElementById('newsGrid');
+        if (!newsGrid) return;
+
+        const gigs = JSON.parse(localStorage.getItem(GIGS_KEY)) || [];
+        newsGrid.innerHTML = '';
+
+        if (gigs.length === 0) {
+            newsGrid.innerHTML = '<p style="grid-column: 1/-1; text-align: center; opacity: 0.7;">Keine aktuellen Gigs.</p>';
+            return;
+        }
+
+        // Sort gigs by date (newest first)
+        gigs.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+        // Take top 3
+        gigs.slice(0, 3).forEach(gig => {
+            const dateObj = new Date(gig.date);
+            const dateStr = dateObj.toLocaleDateString('de-DE', { day: '2-digit', month: 'short', year: 'numeric' });
+
+            const gigItem = document.createElement('div');
+            gigItem.className = 'news-item';
+            gigItem.innerHTML = `
+                <span class="date">${dateStr}</span>
+                <h3>${gig.venue}</h3>
+                <p>${gig.description || ''}</p>
+            `;
+            newsGrid.appendChild(gigItem);
+        });
+    }
+
+    function loadMusic() {
+        const musicWrapper = document.querySelector('.audio-player-wrapper');
+        if (!musicWrapper) return;
+
+        const tracks = JSON.parse(localStorage.getItem(MUSIC_KEY)) || [];
+        musicWrapper.innerHTML = '';
+
+        if (tracks.length === 0) {
+            musicWrapper.innerHTML = '<p style="text-align: center; opacity: 0.7;">Keine Musik verfügbar.</p>';
+            return;
+        }
+
+        tracks.forEach(track => {
+            const trackDiv = document.createElement('div');
+            trackDiv.className = 'track';
+
+            // Use base64 audio if available, otherwise placeholder
+            const audioSrc = track.file || '';
+
+            trackDiv.innerHTML = `
+                <div class="track-info">
+                    <span class="track-title">${track.title}</span>
+                    <span class="track-duration">${track.artist}</span>
+                </div>
+                <audio controls>
+                    <source src="${audioSrc}" type="audio/mpeg">
+                    Your browser does not support the audio element.
+                </audio>
+            `;
+            musicWrapper.appendChild(trackDiv);
+        });
+    }
+
+    // Initial UI Update & Content Load
     updateUI();
+    loadGigs();
+    loadMusic();
 
 });
